@@ -2,6 +2,8 @@ import EditForm from "@/app/components/edit-form";
 import { hono } from "@/lib/hono/client";
 import { Blog } from "@prisma/client";
 
+export const runtime = 'edge';
+
 type Props = {
   params: {
     id: string;

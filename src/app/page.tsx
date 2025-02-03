@@ -4,6 +4,7 @@ import DeleteButton from "./components/delete-button";
 import { InferResponseType } from "hono";
 import { fetcher } from "@/lib/hono/utils";
 
+export const runtime = 'edge';
 
 const url = hono.api.blogs.$url();
 type ResType = InferResponseType<typeof hono.api.blogs.$get>;
