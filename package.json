@@ -20,6 +20,7 @@
     "zod-prisma-types": "^3.2.1"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@mermaid-js/mermaid-cli": "^11.4.2",
     "@types/node": "^20",
     "@types/react": "^18",
