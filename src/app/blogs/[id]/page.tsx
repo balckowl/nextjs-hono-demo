@@ -1,16 +1,11 @@
 import { hono } from "@/lib/hono/client";
 import { Blog } from "@prisma/client";
-import { InferResponseType } from "hono";
 
 type Props = {
   params: {
     id: string;
   };
 };
-
-const url = hono.api.blogs[":id"].$url();
-const $get = hono.api.blogs[":id"].$get
-type ResType = InferResponseType<typeof $get>;
 
 export default async function Page({ params }: Props) {
   const { id } = params;

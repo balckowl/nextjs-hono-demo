@@ -12,6 +12,8 @@ const blogApp = new OpenAPIHono()
   .openapi(updateBlogRoute, updateBlogHandler)
   .openapi(deleteBlogRoute, deleteBlogHandler);
 
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const route = app.route("/blogs", blogApp);
 
 app.doc("/specification", {
