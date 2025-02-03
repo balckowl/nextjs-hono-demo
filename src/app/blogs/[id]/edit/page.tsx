@@ -1,8 +1,9 @@
 import EditForm from "@/app/components/edit-form";
 import { hono } from "@/lib/hono/client";
+import { fetcher } from "@/lib/hono/utils";
 import { Blog } from "@prisma/client";
-
-export const runtime = 'edge';
+import { InferResponseType } from "hono";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: {
@@ -12,17 +13,19 @@ type Props = {
 
 export default async function Page({ params }: Props) {
 
-   const { id } = params;
-  
-    const res = await hono.api.blogs[":id"].$get({
-      param: {
-        id,
-      },
-    });
-  
-  const blog = (await res.json()) as Blog;
+  const { id } = params
+
+  const url = hono.api.blogs[":id"].$url({ param: { id: String(id) } })
+  const $get = hono.api.blogs[":id"].$get
+  type ResType = InferResponseType<typeof $get>;
+
+  const blog = await fetcher<ResType>(url, {
+    cache: "no-store"
+  })
+
+  if (!blog) notFound();
 
   return (
-    <EditForm blog={blog}/>
+    <EditForm blog={blog} />
   );
 }

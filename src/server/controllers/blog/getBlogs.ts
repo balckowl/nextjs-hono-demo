@@ -15,7 +15,7 @@ export const getBlogByIdHandler: RouteHandler<typeof getBlogByIdRoute> = async (
   })
 
   if (!blog) {
-    return c.json({ error: "ブログが見つかりません" }, 404)
+    return c.json(null, 404)
   }
 
   return c.json(blog, 200)
@@ -40,7 +40,7 @@ export const updateBlogHandler: RouteHandler<typeof updateBlogRoute> = async (c)
   const existingBlog = await prisma.blog.findUnique({ where: { id: Number(id) } });
 
   if (!existingBlog) {
-    return c.json({ error: "ブログが見つかりません" }, 404);
+    return c.json(null, 404);
   }
 
   const updatedBlog = await prisma.blog.update({
@@ -57,7 +57,7 @@ export const deleteBlogHandler: RouteHandler<typeof deleteBlogRoute> = async (c)
   const existingBlog = await prisma.blog.findUnique({ where: { id: Number(id) } });
 
   if (!existingBlog) {
-    return c.json({ error: "ブログが見つかりません" }, 404);
+    return c.json(null, 404);
   }
 
   await prisma.blog.delete({ where: { id: Number(id) } });

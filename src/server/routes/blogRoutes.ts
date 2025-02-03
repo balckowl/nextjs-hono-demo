@@ -1,4 +1,4 @@
-import { createRoute } from "@hono/zod-openapi";
+import { createRoute, z } from "@hono/zod-openapi";
 import { BlogIdSchema, BlogSchema, BlogsSchema, CreateBlogSchema, UpdateBlogSchema } from "../models/blogSchema";
 
 export const getBlogsRoute = createRoute({
@@ -26,7 +26,14 @@ export const getBlogByIdRoute = createRoute({
   },
   responses: {
     200: { description: "成功", content: { "application/json": { schema: BlogSchema } } },
-    404: { description: "記事が見つかりません" },
+    404: {
+      description: "記事が見つかりません",
+      content: {
+        "application/json": {
+          schema: z.null()
+        }
+      }
+    }
   }
 })
 
@@ -78,7 +85,13 @@ export const updateBlogRoute = createRoute({
         }
       }
     },
-    404: { description: "ブログが見つかりません" }
+    404: {
+      description: "ブログが見つかりません", content: {
+        "application/json": {
+          schema: z.null()
+        }
+      }
+    }
   }
 })
 
@@ -87,10 +100,16 @@ export const deleteBlogRoute = createRoute({
   method: "delete",
   description: "ブログ記事の削除",
   request: {
-    params: BlogIdSchema, 
+    params: BlogIdSchema,
   },
   responses: {
-    200: {description: "削除成功"},
-    404: { description: "ブログが見つかりません" }
+    200: { description: "削除成功" },
+    404: {
+      description: "ブログが見つかりません", content: {
+        "application/json": {
+          schema: z.null()
+        }
+      }
+    }
   }
 })

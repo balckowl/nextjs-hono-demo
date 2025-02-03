@@ -1,7 +1,7 @@
 "use client"
 
 import { hono } from "@/lib/hono/client";
-import { Blog } from "@prisma/client";
+import { Blog } from "@/server/models/blogSchema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ export default function EditForm({ blog }: { blog: Blog }) {
 
     try {
       const res = await hono.api.blogs[":id"].$put({
-        param:{
+        param: {
           id: String(id)
         },
         json: {
@@ -30,7 +30,7 @@ export default function EditForm({ blog }: { blog: Blog }) {
       });
 
       if (res.ok) {
-        router.push("/"); 
+        router.push("/");
       }
     } catch (error) {
       console.error("Failed to submit blog:", error);
