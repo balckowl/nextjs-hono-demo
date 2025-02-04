@@ -1,4 +1,4 @@
 import { AppType } from "@/server/hono";
 import { hc } from "hono/client";
 
-export const hono = hc<AppType>('http://localhost:3000');
+export const hono = hc<AppType>(process.env.NEXT_PUBLIC_APP_URL as string);
