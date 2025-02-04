@@ -1,6 +1,5 @@
 import { hono } from "@/lib/hono/client";
-import { fetcher } from "@/lib/hono/utils";
-import { Blog } from "@prisma/client";
+import { fetcher } from "@/lib/hono/utils"
 import { InferResponseType } from "hono";
 import { notFound } from "next/navigation";
 
@@ -15,6 +14,7 @@ export default async function Page({ params }: Props) {
   const { id } = params;
 
   const url = hono.api.blogs[":id"].$url({ param: { id: String(id) } })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const $get = hono.api.blogs[":id"].$get
   type ResType = InferResponseType<typeof $get>;
 
