@@ -1,6 +1,7 @@
 "use client"
 
 import { hono } from "@/lib/hono/client"
+import { useRouter } from "next/navigation"
 
 type Props = {
   id: number
@@ -8,12 +9,16 @@ type Props = {
 
 export default function DeleteButton({ id }: Props) {
 
+  const router = useRouter()
+
   const handleDelete = async() => {
     await hono.api.blogs[":id"].$delete({
       param: {
         id: String(id)
       }
     })
+
+    router.refresh();
   }
 
   return (

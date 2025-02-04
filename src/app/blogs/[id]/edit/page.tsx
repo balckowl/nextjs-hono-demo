@@ -1,7 +1,6 @@
 import EditForm from "@/app/components/edit-form";
 import { hono } from "@/lib/hono/client";
 import { fetcher } from "@/lib/hono/utils";
-import { Blog } from "@prisma/client";
 import { InferResponseType } from "hono";
 import { notFound } from "next/navigation";
 
@@ -20,7 +19,10 @@ export default async function Page({ params }: Props) {
   type ResType = InferResponseType<typeof $get>;
 
   const blog = await fetcher<ResType>(url, {
-    cache: "no-store"
+    cache: "no-store",
+    next: {
+      tags: ["tag"]
+    }
   })
 
   if (!blog) notFound();

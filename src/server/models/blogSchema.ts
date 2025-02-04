@@ -1,5 +1,17 @@
 import { z } from "@hono/zod-openapi";
 
+export const UserSchema = z.object({
+  id: z.string().openapi({
+    example: "aaaaaaa"
+  }),
+  name: z.string().nullable().openapi({
+    example: "y_ta"
+  }),
+  image: z.string().nullable().openapi({
+    example: "https://avatars.githubusercontent.com/u/129815120?v=4"
+  }),
+});
+
 export const BlogSchema = z.object({
   id: z.number().openapi({
     example: 1
@@ -13,6 +25,10 @@ export const BlogSchema = z.object({
   createdAt: z.string().datetime().openapi({
     example: "2024-10-30T12:00:00Z"
   }),
+  userId: z.string().openapi({
+    example: "cm6qkipl10000o4z60q7gytcd"
+  }),
+  user: UserSchema,
 })
 
 export const BlogsSchema = z.array(BlogSchema)

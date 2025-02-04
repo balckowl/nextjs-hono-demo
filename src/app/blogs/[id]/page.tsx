@@ -19,13 +19,16 @@ export default async function Page({ params }: Props) {
   type ResType = InferResponseType<typeof $get>;
 
   const blog = await fetcher<ResType>(url, {
-    cache: "no-store"
+    cache: "no-store",
+    next: {
+      tags: ["tag"]
+    }
   })
 
-  if(!blog) notFound();
+  if (!blog) notFound();
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-6">
+    <div className="min-h-[calc(100vh-70px)] bg-gray-100 py-12 px-6">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
         <h1 className="text-3xl font-bold text-gray-900">{blog.title}</h1>
         <p className="text-gray-500 text-sm mt-2">
