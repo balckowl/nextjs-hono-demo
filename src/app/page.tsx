@@ -2,12 +2,11 @@ import { hono } from "@/lib/hono/client";
 import Link from "next/link";
 import DeleteButton from "./components/delete-button";
 import { InferResponseType } from "hono";
-import { fetcher } from "@/lib/hono/utils";
 import { auth } from "@/auth";
 import Image from "next/image";
 
-const url = hono.api.blogs.$url();
-type ResType = InferResponseType<typeof hono.api.blogs.$get>;
+// const url = hono.api.blogs.$url();
+// type ResType = InferResponseType<typeof hono.api.blogs.$get>;
 
 export default async function Page() {
 
@@ -28,7 +27,7 @@ export default async function Page() {
   })
 
   const blogs = await res.json()
-  
+
   const session = await auth()
 
   return (
