@@ -1,7 +1,6 @@
 import { hono } from "@/lib/hono/client";
 import Link from "next/link";
 import DeleteButton from "./components/delete-button";
-import { InferResponseType } from "hono";
 import { auth } from "@/auth";
 import Image from "next/image";
 
