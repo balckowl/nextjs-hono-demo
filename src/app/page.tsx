@@ -11,12 +11,24 @@ type ResType = InferResponseType<typeof hono.api.blogs.$get>;
 
 export default async function Page() {
 
-  const blogs = await fetcher<ResType>(url, {
-    next: {
-      tags:["update", "post"]
-    }
-  });
+  // const blogs = await fetcher<ResType>(url, {
+  //   cache: "no-store",
+  //   next: {
+  //     tags:["posts"]
+  //   }
+  // });
 
+  const res = await hono.api.blogs.$get({},{
+    init: {
+      cache: "no-store",
+      next: {
+        tags:["posts"]
+      }
+    }
+  })
+
+  const blogs = await res.json()
+  
   const session = await auth()
 
   return (

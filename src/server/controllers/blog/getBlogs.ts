@@ -17,6 +17,9 @@ export const getBlogsHandler: RouteHandler<typeof getBlogsRoute> = async (c) => 
       }
     }
   })
+
+  c.header("Cache-Control", "no-store");
+
   return c.json(blogs, 200)
 }
 
@@ -68,7 +71,7 @@ export const createBlogHandler: RouteHandler<typeof createBlogRoute> = async (c)
     }
   })
 
-  revalidateTag("post")
+  revalidateTag("posts");
 
   return c.json(blogs, 201)
 }
