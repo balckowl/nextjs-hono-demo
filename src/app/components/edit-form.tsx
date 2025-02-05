@@ -30,8 +30,8 @@ export default function EditForm({ blog }: { blog: Blog }) {
       });
 
       if (res.ok) {
-        router.refresh();
         router.push("/");
+        router.refresh();
       }
     } catch (error) {
       console.error("Failed to submit blog:", error);

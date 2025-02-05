@@ -23,8 +23,8 @@ export default function NewForm() {
       });
 
       if (res.ok) {
-        router.refresh();
         router.push("/"); 
+        router.refresh();
       }
     } catch (error) {
       console.error("Failed to submit blog:", error);
